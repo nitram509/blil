@@ -216,8 +216,8 @@ func main() {
 
     flag.Parse()
 
-    if (flag.NArg() == 0) {
-        flag.PrintDefaults()
+    if (len(os.Args) == 1) {
+        flag.Usage()
     }
 
     if (flagListColorNames) {
