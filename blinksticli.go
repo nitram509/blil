@@ -199,7 +199,7 @@ func getFlagColor() color.Color {
     if (colors[flagSetColor] != nil) {
         return colors[flagSetColor]
     }
-    validHexCode := regexp.MustCompile(`^#([a-f0-9]{6})$`)
+    validHexCode := regexp.MustCompile(`^#?([a-f0-9]{6})$`)
     if (validHexCode.MatchString(flagSetColor)) {
         hexStr := validHexCode.FindStringSubmatch(flagSetColor)
         bytes, err := hex.DecodeString(hexStr[1])
