@@ -216,6 +216,10 @@ func main() {
 
     flag.Parse()
 
+    if (flag.NArg() == 0) {
+        flag.PrintDefaults()
+    }
+
     if (flagListColorNames) {
         printListColorNames()
     }
