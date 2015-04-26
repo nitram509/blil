@@ -3,7 +3,7 @@ package main
 import (
     "fmt"
     "time"
-    "github.com/nitram509/led"
+    "github.com/boombuler/led"
     "image/color"
     "math/rand"
     "os"
@@ -50,7 +50,7 @@ func getFlagColor() color.Color {
         rand.Seed(time.Now().UnixNano())
         return color.RGBA{uint8(rand.Int()), uint8(rand.Int()), uint8(rand.Int()), 0xFF}
     }
-    if (col == "random") {
+    if (col == "off") {
         return color.Black
     }
     if (colors[col] != nil) {
