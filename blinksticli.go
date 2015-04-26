@@ -37,8 +37,9 @@ func printListColorNames() {
 
 func printListDevices() {
     var i int = 0
+    fmt.Printf("%s\t%s\t%s\n", "Index", "Type", "Path")
     for devInfo := range led.Devices() {
-        fmt.Printf("%d\t%s\n", i,  devInfo.GetType().String())
+        fmt.Printf("%d\t%s\t%s\n", i, devInfo.GetType(), devInfo.GetPath())
         i++
     }
 }
