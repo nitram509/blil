@@ -3,7 +3,7 @@ package main
 import (
     "fmt"
     "time"
-    "github.com/boombuler/led"
+    "github.com/nitram509/led"
     "image/color"
     "math/rand"
     "os"
@@ -81,12 +81,13 @@ func main() {
             fmt.Println(err)
             continue
         }
-        defer dev.Close()
+        defer func() {
+            dev.Close()
+        }()
 
         col := getFlagColor()
         if (col != nil) {
             dev.SetColor(col)
-            time.Sleep(2 * time.Second)
         }
 
     }
