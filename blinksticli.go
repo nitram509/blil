@@ -16,8 +16,8 @@ import (
 
 var (
     VERSION = "0.0.1"
-    flagSetColor = kingpin.Flag("set-color", "Set color for device. The format must be \"#rrggbb\", \"random\", \"off\" or an HTML color name, like \"green\"").String()
-    flagListColors = kingpin.Flag("list-colors", "List all available HTML color names").Bool()
+    flagSetColor = kingpin.Flag("set-color", "Set color for device. The format must be \"#rrggbb\", \"random\", \"off\" or an CSS3 color keyword, e.g. \"green\"").String()
+    flagListColors = kingpin.Flag("list-colors", "List all available CSS3 color keywords, as defined in http://www.w3.org/TR/css3-color/").Bool()
     flagListDevices = kingpin.Flag("list-devices", "List all connected devices").Short('l').Bool()
     flagNumber = kingpin.Flag("number", "Select device by number, starts with 0, default: action is applied to all").Short('n').Int()
 )
