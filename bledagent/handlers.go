@@ -6,7 +6,6 @@ import (
     "net/http"
 
     "github.com/gorilla/mux"
-    "github.com/boombuler/led"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -22,19 +21,8 @@ func LedIndex(w http.ResponseWriter, r *http.Request) {
     }
 }
 
-func TodoShow(w http.ResponseWriter, r *http.Request) {
+func LedShow(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
     todoId := vars["todoId"]
     fmt.Fprintln(w, "Todo show:", todoId)
-}
-
-func detectAllLeds() LedResource {
-    var i int = 0
-    leds := []Led{}
-    for devInfo := range led.Devices() {
-        led := &Led{i, devInfo.GetType().String(), devInfo.GetPath()}
-        leds = append(leds, *led)
-        i++
-    }
-    return LedResource{Leds:leds}
 }
