@@ -5,6 +5,7 @@ import (
     "strconv"
     "time"
     "github.com/boombuler/led"
+    "github.com/nitram509/blinksticli/shared"
     "image/color"
     "math/rand"
     "os"
@@ -29,7 +30,7 @@ var (
 
 func printListColorNames() {
     var colorNames []string
-    for k := range colors {
+    for k := range shared.Colors {
         colorNames = append(colorNames, k)
     }
     sort.Strings(colorNames)
@@ -59,8 +60,8 @@ func getFlagColor() color.Color {
     if (col == "off") {
         return color.Black
     }
-    if (colors[col] != nil) {
-        return colors[col]
+    if (shared.Colors[col] != nil) {
+        return shared.Colors[col]
     }
     validHexCode := regexp.MustCompile(`^#?([a-f0-9]{6})$`)
     if (validHexCode.MatchString(col)) {
