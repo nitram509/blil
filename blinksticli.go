@@ -19,6 +19,7 @@ var (
     flagSetColor = kingpin.Flag("set-color", "Set color for device. The format must be \"#rrggbb\", \"random\", \"off\" or an HTML color name, like \"green\"").String()
     flagListColors = kingpin.Flag("list-colors", "List all available HTML color names").Bool()
     flagListDevices = kingpin.Flag("list-devices", "List all connected devices").Short('l').Bool()
+    flagNumber = kingpin.Flag("number", "Select device by number, starts with 0, default: action is applied to all").Short('n').Int()
 )
 
 func printListColorNames() {
@@ -37,7 +38,7 @@ func printListColorNames() {
 
 func printListDevices() {
     var i int = 0
-    fmt.Printf("%s\t%s\t%s\n", "Index", "Type", "Path")
+    fmt.Printf("%s\t%s\t%s\n", "Number", "Type", "Path")
     for devInfo := range led.Devices() {
         fmt.Printf("%d\t%s\t%s\n", i, devInfo.GetType(), devInfo.GetPath())
         i++
@@ -93,22 +94,24 @@ func main() {
         os.Exit(0)
     }
 
+    var number int = 0
     for devInfo := range led.Devices() {
-        dev, err := devInfo.Open()
-        dev.SetKeepActive(true)
-        if err != nil {
-            fmt.Println(err)
-            continue
+        if (flagNumber == nil || *flagNumber == number) {
+            col := getFlagColor()
+            if (col != nil) {
+                dev, err := devInfo.Open()
+                dev.SetKeepActive(true)
+                if err != nil {
+                    fmt.Println(err)
+                    continue
+                }
+                dev.SetColor(col)
+                defer func() {
+                    dev.Close()
+                }()
+            }
         }
-        defer func() {
-            dev.Close()
-        }()
-
-        col := getFlagColor()
-        if (col != nil) {
-            dev.SetColor(col)
-        }
-
+        number++;
     }
 
 }
