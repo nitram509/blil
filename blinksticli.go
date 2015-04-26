@@ -18,6 +18,7 @@ var (
     VERSION = "0.0.1"
     flagSetColor = kingpin.Flag("set-color", "Set color for device. The format must be \"#rrggbb\" or \"random\" or an HTML color name, like \"green\"").String()
     flagListColors = kingpin.Flag("list-colors", "List all available HTML color names").Bool()
+    flagListDevices = kingpin.Flag("list-devices", "List all connected devices").Short('l').Bool()
 )
 
 func printListColorNames() {
@@ -34,18 +35,25 @@ func printListColorNames() {
     }
 }
 
+func printListDevices() {
+    var i int = 0
+    for devInfo := range led.Devices() {
+        fmt.Printf("%d\t%s", i,  devInfo.GetType().String())
+    }
+}
+
 func getFlagColor() color.Color {
-    *flagSetColor = strings.ToLower(*flagSetColor)
-    if (*flagSetColor == "random") {
+    col := strings.ToLower(*flagSetColor)
+    if (col == "random") {
         rand.Seed(time.Now().UnixNano())
         return color.RGBA{uint8(rand.Int()), uint8(rand.Int()), uint8(rand.Int()), 0xFF}
     }
-    if (colors[*flagSetColor] != nil) {
-        return colors[*flagSetColor]
+    if (colors[col] != nil) {
+        return colors[col]
     }
     validHexCode := regexp.MustCompile(`^#?([a-f0-9]{6})$`)
-    if (validHexCode.MatchString(*flagSetColor)) {
-        hexStr := validHexCode.FindStringSubmatch(*flagSetColor)
+    if (validHexCode.MatchString(col)) {
+        hexStr := validHexCode.FindStringSubmatch(col)
         bytes, err := hex.DecodeString(hexStr[1])
         if (err != nil) {
             fmt.Printf("invalid color code '%s'. use '#rrggbb' instead", hexStr[1])
@@ -68,6 +76,11 @@ func main() {
 
     if (flagListColors != nil && *flagListColors) {
         printListColorNames()
+        os.Exit(0)
+    }
+
+    if (flagListDevices != nil && *flagListDevices) {
+        printListDevices()
         os.Exit(0)
     }
 
