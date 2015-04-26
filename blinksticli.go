@@ -94,6 +94,7 @@ func main() {
 
     for devInfo := range led.Devices() {
         dev, err := devInfo.Open()
+        dev.SetKeepActive(true)
         if err != nil {
             fmt.Println(err)
             continue
