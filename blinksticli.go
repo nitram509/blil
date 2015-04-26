@@ -16,7 +16,7 @@ import (
 
 var (
     VERSION = "0.0.1"
-    flagSetColor = kingpin.Flag("set-color", "Set color for device. The format must be \"#rrggbb\" or \"random\" or an HTML color name, like \"green\"").String()
+    flagSetColor = kingpin.Flag("set-color", "Set color for device. The format must be \"#rrggbb\", \"random\", \"off\" or an HTML color name, like \"green\"").String()
     flagListColors = kingpin.Flag("list-colors", "List all available HTML color names").Bool()
     flagListDevices = kingpin.Flag("list-devices", "List all connected devices").Short('l').Bool()
 )
@@ -38,7 +38,8 @@ func printListColorNames() {
 func printListDevices() {
     var i int = 0
     for devInfo := range led.Devices() {
-        fmt.Printf("%d\t%s", i,  devInfo.GetType().String())
+        fmt.Printf("%d\t%s\n", i,  devInfo.GetType().String())
+        i++
     }
 }
 
@@ -47,6 +48,9 @@ func getFlagColor() color.Color {
     if (col == "random") {
         rand.Seed(time.Now().UnixNano())
         return color.RGBA{uint8(rand.Int()), uint8(rand.Int()), uint8(rand.Int()), 0xFF}
+    }
+    if (col == "random") {
+        return color.Black
     }
     if (colors[col] != nil) {
         return colors[col]
