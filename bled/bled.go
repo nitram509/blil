@@ -1,19 +1,13 @@
 package main
 
 import (
-	"encoding/hex"
 	"fmt"
 	"github.com/boombuler/led"
 	"github.com/nitram509/bled/shared"
 	"gopkg.in/alecthomas/kingpin.v1"
-	"image/color"
-	"math/rand"
 	"os"
-	"regexp"
 	"sort"
 	"strconv"
-	"strings"
-	"time"
 )
 
 const (
@@ -51,31 +45,6 @@ func printListDevices() {
 	}
 }
 
-func getFlagColor() color.Color {
-	col := strings.ToLower(*flagSetColor)
-	if col == "random" {
-		rand.Seed(time.Now().UnixNano())
-		return color.RGBA{uint8(rand.Int()), uint8(rand.Int()), uint8(rand.Int()), 0xFF}
-	}
-	if col == "off" {
-		return color.Black
-	}
-	if shared.Colors[col] != nil {
-		return shared.Colors[col]
-	}
-	validHexCode := regexp.MustCompile(`^#?([a-f0-9]{6})$`)
-	if validHexCode.MatchString(col) {
-		hexStr := validHexCode.FindStringSubmatch(col)
-		bytes, err := hex.DecodeString(hexStr[1])
-		if err != nil {
-			fmt.Printf("invalid color code '%s'. use '#rrggbb' instead", hexStr[1])
-			return nil
-		}
-		return color.RGBA{uint8(bytes[0]), uint8(bytes[1]), uint8(bytes[2]), 0xFF}
-	}
-	return nil
-}
-
 func main() {
 
 	kingpin.Version(VERSION)
@@ -103,7 +72,7 @@ func main() {
 	var number int = 0
 	for devInfo := range led.Devices() {
 		if DEFAULT_NO_NUMBER == *flagNumber || *flagNumber == number {
-			col := getFlagColor()
+			col := shared.MapColor(*flagSetColor)
 			if col != nil {
 				dev, err := devInfo.Open()
 				if err != nil {

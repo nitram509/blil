@@ -30,13 +30,7 @@ func NewRouter() *mux.Router {
 }
 
 var routes = Routes{
-    Route{
-        "Index", "GET", "/", Index,
-    },
-    Route{
-        "TodoIndex", "GET", "/led", LedIndex,
-    },
-    Route{
-        "TodoShow", "GET", "/led/{ledNr}", LedShow,
-    },
+    Route{"Index", "GET", "/", Index, },
+    Route{"TodoIndex", "GET", "/led", LedIndex, },
+    Route{"TodoShow", "POST", "/led/{ledNr}/{color}", LedSetColor, },
 }

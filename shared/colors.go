@@ -2,6 +2,12 @@ package shared
 
 import (
     "image/color"
+    "strings"
+    "math/rand"
+    "time"
+    "regexp"
+    "encoding/hex"
+    "fmt"
 )
 
 var Colors map[string]*color.RGBA
@@ -155,4 +161,29 @@ func init() {
     Colors["whitesmoke"] = &color.RGBA{0xf5, 0xf5, 0xf5, 0xFF}
     Colors["yellow"] = &color.RGBA{0xff, 0xff, 0x00, 0xFF}
     Colors["yellowgreen"] = &color.RGBA{0x9a, 0xcd, 0x32, 0xFF}
+}
+
+func MapColor(colorString string) color.Color {
+    col := strings.ToLower(colorString)
+    if col == "random" {
+        rand.Seed(time.Now().UnixNano())
+        return color.RGBA{uint8(rand.Int()), uint8(rand.Int()), uint8(rand.Int()), 0xFF}
+    }
+    if col == "off" {
+        return color.Black
+    }
+    if Colors[col] != nil {
+        return Colors[col]
+    }
+    validHexCode := regexp.MustCompile(`^#?([a-f0-9]{6})$`)
+    if validHexCode.MatchString(col) {
+        hexStr := validHexCode.FindStringSubmatch(col)
+        bytes, err := hex.DecodeString(hexStr[1])
+        if err != nil {
+            fmt.Printf("invalid color code '%s'. use '#rrggbb' instead", hexStr[1])
+            return nil
+        }
+        return color.RGBA{uint8(bytes[0]), uint8(bytes[1]), uint8(bytes[2]), 0xFF}
+    }
+    return nil
 }
