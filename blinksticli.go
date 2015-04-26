@@ -1,7 +1,6 @@
 package main
 
 import (
-    "flag"
     "fmt"
     "time"
     "github.com/boombuler/led"
@@ -12,15 +11,14 @@ import (
     "strings"
     "regexp"
     "encoding/hex"
+    "gopkg.in/alecthomas/kingpin.v1"
 )
 
-var flagSetColor string
-var flagListColorNames bool
-
-func init() {
-    flag.StringVar(&flagSetColor, "set-color", "", "Set color for device. The format must be \"#rrggbb\" or \"random\" or an HTML color name, like \"green\"")
-    flag.BoolVar(&flagListColorNames, "list-color-names", false, "list all available HTML color names")
-}
+var (
+    VERSION = "0.0.1"
+    flagSetColor = kingpin.Flag("set-color", "Set color for device. The format must be \"#rrggbb\" or \"random\" or an HTML color name, like \"green\"").String()
+    flagListColors = kingpin.Flag("list-colors", "List all available HTML color names").Bool()
+)
 
 func printListColorNames() {
     var colorNames []string
@@ -37,17 +35,17 @@ func printListColorNames() {
 }
 
 func getFlagColor() color.Color {
-    flagSetColor = strings.ToLower(flagSetColor)
-    if (flagSetColor == "random") {
+    *flagSetColor = strings.ToLower(*flagSetColor)
+    if (*flagSetColor == "random") {
         rand.Seed(time.Now().UnixNano())
         return color.RGBA{uint8(rand.Int()), uint8(rand.Int()), uint8(rand.Int()), 0xFF}
     }
-    if (colors[flagSetColor] != nil) {
-        return colors[flagSetColor]
+    if (colors[*flagSetColor] != nil) {
+        return colors[*flagSetColor]
     }
     validHexCode := regexp.MustCompile(`^#?([a-f0-9]{6})$`)
-    if (validHexCode.MatchString(flagSetColor)) {
-        hexStr := validHexCode.FindStringSubmatch(flagSetColor)
+    if (validHexCode.MatchString(*flagSetColor)) {
+        hexStr := validHexCode.FindStringSubmatch(*flagSetColor)
         bytes, err := hex.DecodeString(hexStr[1])
         if (err != nil) {
             fmt.Printf("invalid color code '%s'. use '#rrggbb' instead", hexStr[1])
@@ -60,17 +58,20 @@ func getFlagColor() color.Color {
 
 func main() {
 
-    flag.Parse()
+    kingpin.Version(VERSION)
+    kingpin.Parse()
 
-    if (len(os.Args) == 1) {
-        flag.Usage()
+    if (len(os.Args) <= 1) {
+        kingpin.Usage()
+        os.Exit(0)
     }
 
-    if (flagListColorNames) {
+    if (flagListColors != nil && *flagListColors) {
         printListColorNames()
+        os.Exit(0)
     }
 
-    if (len(flagSetColor) < 1) {
+    if (flagSetColor == nil) {
         os.Exit(0)
     }
 
@@ -85,9 +86,9 @@ func main() {
         col := getFlagColor()
         if (col != nil) {
             dev.SetColor(col)
+            time.Sleep(2 * time.Second)
         }
 
-        time.Sleep(2 * time.Second)
     }
 
 }
