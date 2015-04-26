@@ -2,6 +2,7 @@ package main
 
 import (
     "fmt"
+    "strconv"
     "time"
     "github.com/boombuler/led"
     "image/color"
@@ -16,10 +17,11 @@ import (
 
 var (
     VERSION = "0.0.1"
+    DEFAULT_NO_NUMBER = -1
     flagSetColor = kingpin.Flag("set-color", "Set color for device. The format must be \"#rrggbb\", \"random\", \"off\" or an CSS3 color keyword, e.g. \"green\"").String()
     flagListColors = kingpin.Flag("list-colors", "List all available CSS3 color keywords, as defined in http://www.w3.org/TR/css3-color/").Bool()
     flagListDevices = kingpin.Flag("list-devices", "List all connected devices").Short('l').Bool()
-    flagNumber = kingpin.Flag("number", "Select device by number, starts with 0, default: action is applied to all").Short('n').Int()
+    flagNumber = kingpin.Flag("number", "Select device by number, starts with 0, default: action is applied to all").Short('n').Default(strconv.Itoa(DEFAULT_NO_NUMBER)).Int()
 )
 
 func printListColorNames() {
@@ -96,15 +98,15 @@ func main() {
 
     var number int = 0
     for devInfo := range led.Devices() {
-        if (flagNumber == nil || *flagNumber == number) {
+        if (DEFAULT_NO_NUMBER == *flagNumber || *flagNumber == number) {
             col := getFlagColor()
             if (col != nil) {
                 dev, err := devInfo.Open()
-                dev.SetKeepActive(true)
                 if err != nil {
                     fmt.Println(err)
                     continue
                 }
+                dev.SetKeepActive(true)
                 dev.SetColor(col)
                 defer func() {
                     dev.Close()
