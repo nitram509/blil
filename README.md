@@ -13,4 +13,4 @@
 * [Busylight Lync](http://www.busylight.com/busylight-lync.html)
 * [DreamCheeky USBMailNotifier](http://www.dreamcheeky.com/webmail-notifier)
 
-_powered by_ https://github.com/boombuler/hid
+_powered by_ https://github.com/boombuler/led
