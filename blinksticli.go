@@ -15,9 +15,12 @@ import (
     "gopkg.in/alecthomas/kingpin.v1"
 )
 
-var (
+const (
     VERSION = "0.0.1"
     DEFAULT_NO_NUMBER = -1
+)
+
+var (
     flagSetColor = kingpin.Flag("set-color", "Set color for device. The format must be \"#rrggbb\", \"random\", \"off\" or an CSS3 color keyword, e.g. \"green\"").String()
     flagListColors = kingpin.Flag("list-colors", "List all available CSS3 color keywords, as defined in http://www.w3.org/TR/css3-color/").Bool()
     flagListDevices = kingpin.Flag("list-devices", "List all connected devices").Short('l').Bool()
