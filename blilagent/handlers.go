@@ -6,7 +6,7 @@ import (
     "net/http"
 
     "github.com/gorilla/mux"
-    "github.com/nitram509/bled/shared"
+    "github.com/nitram509/blil/shared"
     "strconv"
 )
 

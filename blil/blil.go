@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/boombuler/led"
-	"github.com/nitram509/bled/shared"
+	"github.com/nitram509/blil/shared"
 	"gopkg.in/alecthomas/kingpin.v1"
 	"os"
 	"sort"
