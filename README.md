@@ -1,7 +1,7 @@
-# BLED - Blinking LED
+# BLIL - Blinking Light
 
-1. ```bled``` A command line client, written in GO, works on Windows and Mac OS X
-2. ```bledagent``` A web server, which makes the devices available via HTTP + JSON
+1. ```blil``` A command line client, written in GO, works on Windows and Mac OS X
+2. ```blilagent``` A web server, which makes the devices available via HTTP + JSON
 
 ## Supported devices
 
