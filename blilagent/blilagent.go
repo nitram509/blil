@@ -6,10 +6,10 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"github.com/nitram509/blil/blilagent/info"
 )
 
 const (
-	VERSION           = "0.0.1"
 	DEFAULT_PORT      = 8080
 	DEFAULT_INTERFACE = "127.0.0.1"
 )
@@ -21,7 +21,7 @@ var (
 
 func main() {
 
-	kingpin.Version(VERSION)
+	kingpin.Version(info.VERSION)
 	kingpin.Parse()
 
 	router := NewRouter()
