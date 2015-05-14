@@ -13,6 +13,7 @@ import (
 const (
 	VERSION           = "0.0.1"
 	DEFAULT_NO_NUMBER = -1
+	DEFAULT_NO_PATH   = "<<no-path>>"
 )
 
 var (
@@ -20,6 +21,7 @@ var (
 	flagListColors  = kingpin.Flag("list-colors", "List all available CSS3 color keywords, as defined in http://www.w3.org/TR/css3-color/").Bool()
 	flagListDevices = kingpin.Flag("list-devices", "List all connected devices").Short('l').Bool()
 	flagNumber      = kingpin.Flag("number", "Select device by number, starts with 0, default: action is applied to all").Short('n').Default(strconv.Itoa(DEFAULT_NO_NUMBER)).Int()
+	flagPath        = kingpin.Flag("path", "Select device by path (the path is platform dependant)").Short('p').Default(DEFAULT_NO_PATH).String()
 )
 
 func printListColorNames() {
@@ -43,6 +45,18 @@ func printListDevices() {
 		fmt.Printf("%d\t%s\t%s\n", i, devInfo.GetType(), devInfo.GetPath())
 		i++
 	}
+}
+
+func allDevicesSelected() bool {
+	return DEFAULT_NO_NUMBER == *flagNumber && DEFAULT_NO_PATH == *flagPath
+}
+
+func selectedByNumber(number int) bool {
+	return *flagNumber == number
+}
+
+func selectedByPath(devInfo led.DeviceInfo) bool {
+	return *flagPath == devInfo.GetPath()
 }
 
 func main() {
@@ -71,7 +85,7 @@ func main() {
 
 	var number int = 0
 	for devInfo := range led.Devices() {
-		if DEFAULT_NO_NUMBER == *flagNumber || *flagNumber == number {
+		if allDevicesSelected() || selectedByNumber(number) || selectedByPath(devInfo) {
 			col := shared.MapColor(*flagSetColor)
 			if col != nil {
 				dev, err := devInfo.Open()
