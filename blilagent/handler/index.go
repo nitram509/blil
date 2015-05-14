@@ -23,7 +23,7 @@ type embedded struct {
 type indexResource struct {
 	Version  string   `json:"version"`
 	Name     string   `json:"name"`
-	Embedded embedded `json: "_embedded"`
+	Embedded embedded `json:"_embedded"`
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
