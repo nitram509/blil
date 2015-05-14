@@ -50,5 +50,4 @@ func SetLedColor(nr int, col color.Color) {
 		}
 		number++
 	}
-
 }
