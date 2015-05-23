@@ -17,11 +17,11 @@ type Led struct {
 	Color  string `json:"color"`
 }
 
-type LedCollectionResource struct {
+type LedCollection struct {
 	Leds []LedInfo `json:"leds"`
 }
 
-func DetectAllLeds() LedCollectionResource {
+func DetectAllLeds() LedCollection {
 	var i int = 0
 	leds := []LedInfo{}
 	for devInfo := range led.Devices() {
@@ -29,7 +29,7 @@ func DetectAllLeds() LedCollectionResource {
 		leds = append(leds, *led)
 		i++
 	}
-	return LedCollectionResource{Leds: leds}
+	return LedCollection{Leds: leds}
 }
 
 func SetLedColor(nr int, col color.Color) {

@@ -5,6 +5,7 @@ import (
 	"github.com/nitram509/blil/blilweb/info"
 	"github.com/nitram509/blil/blilweb/led"
 	"net/http"
+	"strconv"
 )
 
 type link struct {
@@ -12,12 +13,17 @@ type link struct {
 	Title string `json:"title"`
 }
 
-type links struct {
+type selfLink struct {
 	Self link `json:"self"`
 }
 
+type ledInfoResource struct {
+	led.LedInfo            //embedded
+	Links       []selfLink `json:"_links"`
+}
+
 type embedded struct {
-	Led []led.LedInfo `json:"led"`
+	Led []ledInfoResource `json:"leds"`
 }
 
 type indexResource struct {
@@ -31,7 +37,23 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 
 	embeddedleds := embedded{
-		Led: led.DetectAllLeds().Leds,
+		Led: make([]ledInfoResource, 0),
+	}
+
+	leds := led.DetectAllLeds().Leds
+	for l := range leds {
+		led := leds[l]
+		lir := ledInfoResource{
+			Links: make([]selfLink, 0),
+		}
+		lir.Links = append(lir.Links, selfLink{Self: link{
+			Href:  "http://" + r.Host + "/led/" + strconv.Itoa(led.Number),
+			Title: "Set or get color on this LED",
+		}})
+		lir.Number = led.Number
+		lir.Path = led.Path
+		lir.Type = led.Type
+		embeddedleds.Led = append(embeddedleds.Led, lir)
 	}
 
 	index := &indexResource{

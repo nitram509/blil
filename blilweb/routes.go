@@ -34,4 +34,5 @@ var routes = Routes{
 	Route{"Index", "GET", "/", handler.Index},
 	Route{"LedIndex", "GET", "/led", handler.LedIndex},
 	Route{"LedSetColor", "POST", "/led/{ledNr}/{color}", handler.LedSetColor},
+	Route{"LedGetColor", "GET", "/led/{ledNr}", handler.LedGetColor},
 }
