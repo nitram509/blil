@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/nitram509/blil/blilagent/handler"
+	"github.com/nitram509/blil/blilweb/handler"
 )
 
 type Route struct {

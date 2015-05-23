@@ -2,8 +2,8 @@ package handler
 
 import (
 	"encoding/json"
-	"github.com/nitram509/blil/blilagent/info"
-	"github.com/nitram509/blil/blilagent/led"
+	"github.com/nitram509/blil/blilweb/info"
+	"github.com/nitram509/blil/blilweb/led"
 	"net/http"
 )
 

@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"github.com/nitram509/blil/blilagent/info"
+	"github.com/nitram509/blil/blilweb/info"
 )
 
 const (
