@@ -27,6 +27,49 @@ Flags:
   --version           Show application version.
 ```
 
+
+## blilweb
+
+
+### get all available devices
+
+GET http://localhost:8080/
+
+```json
+{
+    "version": "0.0.1",
+    "name": "BliL - Blinking Light",
+    "_embedded": {
+        "leds": [
+            {
+                "number": 0,
+                "type": "BlinkStick",
+                "path": "USB_20a0_41e5_14100000",
+                "_links": [
+                    {
+                        "self": {
+                            "href": "http://localhost:8080/led/0",
+                            "title": "Set or get color on this LED"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
+```
+
+### set a color
+
+POST http://localhost:8080/led/0/green
+
+```json
+{
+    "number": 0,
+    "color": "008000"
+}
+```
+
 ## Supported devices
 
 * [blink(1)](http://blink1.thingm.com/)
