@@ -3,6 +3,10 @@
 1. ```blil``` A command line client, written in GO, works on Windows and Mac OS X
 2. ```blilweb``` A web server, which makes the devices available via REST API (HTTP + JSON)
 
+#### License
+
+The MIT License (MIT)
+
 ## Supported devices
 
 * [blink(1)](http://blink1.thingm.com/)
@@ -14,3 +18,4 @@
 * [DreamCheeky USBMailNotifier](http://www.dreamcheeky.com/webmail-notifier)
 
 _powered by_ https://github.com/boombuler/led
+
