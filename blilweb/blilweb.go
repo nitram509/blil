@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/nitram509/blil/blilweb/info"
 	"gopkg.in/alecthomas/kingpin.v1"
 	"log"
 	"net/http"
 	"strconv"
-	"github.com/nitram509/blil/blilweb/info"
 )
 
 const (
