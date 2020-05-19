@@ -1,6 +1,6 @@
 # BliL - Blinking Light
 
-A command line client, which makes a blinkstick and compatible devices,
+A command line client, which can control a blinkstick and/or compatible devices,
 written in GO, works on Windows and Mac OS X
 
 
