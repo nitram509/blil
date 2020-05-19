@@ -1,9 +1,8 @@
-package main
+package blil
 
 import (
 	"fmt"
 	"github.com/boombuler/led"
-	"github.com/nitram509/blil/shared"
 	"gopkg.in/alecthomas/kingpin.v1"
 	"os"
 	"sort"
@@ -26,7 +25,7 @@ var (
 
 func printListColorNames() {
 	var colorNames []string
-	for k := range shared.Colors {
+	for k := range Colors {
 		colorNames = append(colorNames, k)
 	}
 	sort.Strings(colorNames)
@@ -86,7 +85,7 @@ func main() {
 	var number int = 0
 	for devInfo := range led.Devices() {
 		if allDevicesSelected() || selectedByNumber(number) || selectedByPath(devInfo) {
-			col := shared.MapColor(*flagSetColor)
+			col := MapColor(*flagSetColor)
 			if col != nil {
 				dev, err := devInfo.Open()
 				if err != nil {

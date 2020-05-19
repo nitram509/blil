@@ -1,0 +1,12 @@
+version: '2'
+
+# how to use this file: https://taskfile.dev/#/usage
+
+tasks:
+  build:
+    cmds:
+      - go build ./cmd/blil
+
+  test:
+    cmds:
+      - go test ./cmd/blil
