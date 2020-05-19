@@ -1,7 +1,8 @@
 # BliL - Blinking Light
 
-1. ```blil``` A command line client, written in GO, works on Windows and Mac OS X
-2. ```blilweb``` A web server, which makes the devices available via REST API (HTTP + JSON)
+A command line client, which makes a blinkstick and compatible devices,
+written in GO, works on Windows and Mac OS X
+
 
 #### License
 
@@ -27,48 +28,6 @@ Flags:
   --version           Show application version.
 ```
 
-
-## blilweb
-
-
-### get all available devices
-
-GET http://localhost:8080/
-
-```json
-{
-    "version": "0.0.1",
-    "name": "BliL - Blinking Light",
-    "_embedded": {
-        "leds": [
-            {
-                "number": 0,
-                "type": "BlinkStick",
-                "path": "USB_20a0_41e5_14100000",
-                "_links": [
-                    {
-                        "self": {
-                            "href": "http://localhost:8080/led/0",
-                            "title": "Set or get color on this LED"
-                        }
-                    }
-                ]
-            }
-        ]
-    }
-}
-```
-
-### set a color
-
-POST http://localhost:8080/led/0/green
-
-```json
-{
-    "number": 0,
-    "color": "008000"
-}
-```
 
 ## Supported devices
 
