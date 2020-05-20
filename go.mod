@@ -9,3 +9,6 @@ require (
 	github.com/stretchr/testify v1.5.1 // indirect
 	gopkg.in/alecthomas/kingpin.v1 v1.3.7
 )
+
+// replace because build error: go build github.com/boombuler/hid: invalid flag in #cgo LDFLAGS: -fconstant-cfstrings
+replace github.com/boombuler/hid => github.com/nitram509/hid v0.0.0-20200516220657-af2d63ac9fab
