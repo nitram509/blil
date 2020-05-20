@@ -1,4 +1,4 @@
-package blil
+package main
 
 import (
 	"fmt"
@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	VERSION           = "0.0.1"
+	VERSION           = "0.2.0"
 	DEFAULT_NO_NUMBER = -1
 	DEFAULT_NO_PATH   = "<<no-path>>"
 )

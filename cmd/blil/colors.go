@@ -1,4 +1,4 @@
-package blil
+package main
 
 import (
 	"encoding/hex"
