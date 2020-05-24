@@ -13,7 +13,7 @@ The MIT License (MIT)
 
 Usage:
 
-```bash
+```
 usage: blil [<flags>]
 
 Flags:
@@ -27,6 +27,22 @@ Flags:
                       Select device by path (the path is platform dependant)
   --version           Show application version.
 ```
+
+
+## installation
+
+There are no pre-build binaries available at the moment, so you have to download the sources and build from scratch.
+This is quite easy, since it just requires a Go runtime, to be downloaded from https://golang.org/dl/
+
+### requirements
+
+* Go 1.14 or newer
+
+``
+git clone https://github.com/nitram509/blil.git
+cd blil
+go build ./cmd/blil
+``
 
 
 ## Supported devices
