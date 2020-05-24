@@ -38,11 +38,15 @@ This is quite easy, since it just requires a Go runtime, to be downloaded from h
 
 * Go 1.14 or newer
 
-``
-git clone https://github.com/nitram509/blil.git
-cd blil
-go build ./cmd/blil
-``
+```shell script
+go get github.com/nitram509/blil/cmd/blil
+go install github.com/nitram509/blil/cmd/blil
+~/go/bin/blil --version
+## 0.2.0
+```
+
+You might want to copy the binary ```~/go/bin/blil``` into ```/usr/local/bin```
+or add the folder to your PATH variable.
 
 
 ## Supported devices
