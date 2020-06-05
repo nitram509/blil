@@ -8,5 +8,11 @@ os:
 go:
   - 1.14.x
 
+addons:
+  apt:
+    packages:
+      - libusb-1.0-0-dev
+      - libusb-1.0-0
+
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install libusb; fi
