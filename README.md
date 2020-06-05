@@ -3,6 +3,10 @@
 A command line client, which can control a blinkstick and/or compatible devices,
 written in GO, works on Windows and Mac OS X
 
+#### Build status
+
+[![Build Status](https://travis-ci.org/nitram509/blil.svg?branch=master)](https://travis-ci.org/nitram509/blil)
+
 
 #### License
 
