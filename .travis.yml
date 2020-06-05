@@ -8,3 +8,5 @@ os:
 go:
   - 1.14.x
 
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install libusb; fi
