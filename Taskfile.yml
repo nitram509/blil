@@ -3,10 +3,17 @@ version: '2'
 # how to use this file: https://taskfile.dev/#/usage
 
 tasks:
+
+  lint:
+    cmds:
+      - go vet ./cmd/blil
+
   build:
+    deps: [lint]
     cmds:
       - go build ./cmd/blil
 
   test:
+    deps: [lint]
     cmds:
       - go test ./cmd/blil
