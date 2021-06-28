@@ -1,7 +1,7 @@
 # github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d
 ## explicit
 github.com/alecthomas/units
-# github.com/boombuler/hid v0.0.0-20200303134931-8ff92ccd15a8 => github.com/nitram509/hid v0.0.0-20200516220657-af2d63ac9fab
+# github.com/boombuler/hid v0.0.0-20200606170446-6a2dff8586bc
 ## explicit
 github.com/boombuler/hid
 # github.com/boombuler/led v0.0.0-20190225062837-d94ba02fda02
@@ -12,4 +12,3 @@ github.com/boombuler/led
 # gopkg.in/alecthomas/kingpin.v1 v1.3.7
 ## explicit
 gopkg.in/alecthomas/kingpin.v1
-# github.com/boombuler/hid => github.com/nitram509/hid v0.0.0-20200516220657-af2d63ac9fab

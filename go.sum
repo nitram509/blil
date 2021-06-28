@@ -2,6 +2,8 @@ github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d h1:UQZhZ2O0vMHr2c
 github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d/go.mod h1:rBZYJk541a8SKzHPHnH3zbiI+7dagKZ0cgpgrD7Fyho=
 github.com/boombuler/hid v0.0.0-20200303134931-8ff92ccd15a8 h1:CtI6KKnNPht+31ebs+l+EwJZRnd7+bNmcg2vIUNu8ME=
 github.com/boombuler/hid v0.0.0-20200303134931-8ff92ccd15a8/go.mod h1:5tIGNm7VNPEAS8ulRl5g4wU/zCpPgj5vyYI5Bo77Hz8=
+github.com/boombuler/hid v0.0.0-20200606170446-6a2dff8586bc h1:mPoyO6/N4SwSKRhuhYccA3dAVSnQFRl+3kuiTf9ptAQ=
+github.com/boombuler/hid v0.0.0-20200606170446-6a2dff8586bc/go.mod h1:5tIGNm7VNPEAS8ulRl5g4wU/zCpPgj5vyYI5Bo77Hz8=
 github.com/boombuler/led v0.0.0-20190225062837-d94ba02fda02 h1:+RXyv+EV4j1UuCtddZxz1GCEaYnivCpfcAbU8F/E1+c=
 github.com/boombuler/led v0.0.0-20190225062837-d94ba02fda02/go.mod h1:3aukX3oq0T09JVArrfnKSzt2fM9SLHsYS/zZoea+fyM=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
